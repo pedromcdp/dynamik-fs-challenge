@@ -6,3 +6,11 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model Developer {
+  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  nickname String @unique
+  name String 
+  birth_date DateTime
+  stack String[]
+}
