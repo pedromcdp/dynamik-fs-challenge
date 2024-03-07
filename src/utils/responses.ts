@@ -8,7 +8,7 @@ export const Success = (
   return NextResponse.json(
     {
       success: true,
-      data,
+      ...data,
     },
     { status: status, headers: headers }
   );
