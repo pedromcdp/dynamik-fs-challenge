@@ -2,6 +2,7 @@ import { BadRequest, Success, NotFound, Error } from "@/utils/responses";
 import { connect } from "@/lib/mongodb";
 import { Developer } from "@/models";
 import { formatDev } from "@/helpers/formatDev";
+import { IDeveloper } from "@/types";
 
 export async function GET(_: Request, { params: { id } }: any) {
   if (!id) {
@@ -10,7 +11,7 @@ export async function GET(_: Request, { params: { id } }: any) {
 
   try {
     await connect();
-    const dev = await Developer!.findById(id);
+    const dev: IDeveloper | null = await Developer!.findById(id);
 
     return dev
       ? Success(200, formatDev(dev))
