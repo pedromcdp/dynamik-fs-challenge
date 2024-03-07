@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 
-export const Success = (data: any) => {
+export const Success = (
+  status: number = 200,
+  data: any,
+  headers?: HeadersInit
+) => {
   return NextResponse.json(
     {
       success: true,
       data,
     },
-    { status: 200 }
+    { status: status, headers: headers }
   );
 };
 
