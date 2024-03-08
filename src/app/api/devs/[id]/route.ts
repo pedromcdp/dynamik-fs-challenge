@@ -14,7 +14,7 @@ export async function GET(_: Request, { params: { id } }: any) {
     const dev: IDeveloper | null = await Developer!.findById(id);
 
     return dev
-      ? Success(200, formatDev(dev))
+      ? Success(200, { data: formatDev(dev) })
       : NotFound("Não foi encontrado nenhum Developer com esse id.");
   } catch (error) {
     return Error(error);
