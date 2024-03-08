@@ -1,7 +1,17 @@
 import type { Metadata, Viewport } from "next";
+import { Montserrat } from "next/font/google";
 import "@/styles/globals.css";
 import { AppConfig } from "@/utils/appConfig";
 import { Providers } from "@/providers";
+import { cn } from "@/utils/cn";
+import { NavBar } from "@/components/shared/NavBar";
+import Footer from "@/components/shared/Footer";
+
+const font = Montserrat({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: AppConfig.name,
@@ -11,8 +21,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  minimumScale: 1,
-  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -22,10 +30,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt">
-      <body className="relative font-sans antialised">
+      <body className={cn("relative antialised", font.className)}>
         <Providers>
           <div className="relative flex min-h-[100dvh] flex-col bg-background text-foreground scroll-smooth">
-            {children}
+            <NavBar />
+            <main className="mx-auto max-w-screen-xl p-6 flex flex-grow w-full">
+              {children}
+            </main>
+            <Footer />
           </div>
         </Providers>
       </body>
