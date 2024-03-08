@@ -44,16 +44,16 @@ export async function GET(req: Request) {
       },
     ]);
 
-    if (result.length === 0) {
-      return Success(200, { devs: [] });
-    }
-
     return Success(200, {
-      numberOfResults: result[0].numberOfResults,
-      totalResults: result[0].totalResults,
+      numberOfResults: result.length === 0 ? 0 : result[0].numberOfResults,
+      totalResults: result.length === 0 ? 0 : result[0].totalResults,
       page: page,
-      totalPages: Math.ceil(result[0].totalResults / 20),
-      data: result[0].devs.map((dev: IDeveloper) => formatDev(dev)),
+      totalPages:
+        result.length === 0 ? 0 : Math.ceil(result[0].totalResults / 20),
+      data:
+        result.length === 0
+          ? []
+          : result[0].devs.map((dev: IDeveloper) => formatDev(dev)),
     });
   } catch (error) {
     return Error(error);
