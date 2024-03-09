@@ -44,11 +44,14 @@ export const NotValid = (message: string) => {
   );
 };
 
-export const Error = (message: string | unknown) => {
+export const Error = (error: string | unknown) => {
   return NextResponse.json(
     {
       success: false,
-      message,
+      message:
+        typeof error === "object" && error !== null && "message" in error
+          ? error.message
+          : "Ocorreu um erro.",
     },
     { status: 500 }
   );
