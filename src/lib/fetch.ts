@@ -9,6 +9,7 @@ export const getDevById = async (id: string): Promise<IGetDevResponse> => {
     },
     next: { tags: [id] },
   });
+  revalidateTag(id);
   const data = await response.json();
   return data;
 };
