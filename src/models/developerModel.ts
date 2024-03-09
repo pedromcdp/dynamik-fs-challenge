@@ -5,7 +5,6 @@ const { Schema } = mongoose;
 let Developer: mongoose.Model<any> | undefined;
 
 const DeveloperSchema = new Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   nickname: {
     type: String,
     required: true,
