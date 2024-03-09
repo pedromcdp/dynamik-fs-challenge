@@ -11,6 +11,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@nextui-org/react": "^2.2.10",
     "clsx": "^2.1.0",
     "date-fns": "^3.3.1",
