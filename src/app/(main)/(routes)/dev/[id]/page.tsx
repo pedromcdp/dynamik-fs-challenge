@@ -7,10 +7,10 @@ export default async function Page({
 }: {
   params: { id: string };
 }): Promise<JSX.Element> {
-  const data = await getDevById(params.id);
+  const response = await getDevById(params.id);
 
-  return data && data.name ? (
-    <TableView headData={tableHeadData} data={[data]} />
+  return response && response.data.name ? (
+    <TableView headData={tableHeadData} data={[response.data]} />
   ) : (
     <p className="w-full text-center">
       Não foi possível encontrar developer com esse id.

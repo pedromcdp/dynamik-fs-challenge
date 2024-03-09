@@ -26,8 +26,23 @@ export default async function Home({
   );
 
   if (response.numberOfResults === 0) {
-    return <p className="text-center w-full ">Nenhum dev encontrado</p>;
+    return <p className="text-center w-full">Nenhum dev encontrado</p>;
   }
 
-  return <TableView headData={tableHeadData} data={response.data} />;
+  return (
+    <section id="dev-table" className="w-full flex flex-col gap-2">
+      <div className="flex justify-between items-center">
+        <span>
+          Página {response.page} de {response.totalPages}
+        </span>
+        <span>
+          {response.numberOfResults}{" "}
+          {response.numberOfResults === 1
+            ? "dev encontrado"
+            : "devs encontrados "}
+        </span>
+      </div>
+      <TableView headData={tableHeadData} data={response.data} />
+    </section>
+  );
 }
