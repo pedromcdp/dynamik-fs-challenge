@@ -1,4 +1,4 @@
-import { Success, Error, BadRequest } from "@/utils/responses";
+import { Success, Error, BadRequest, NotValid } from "@/utils/responses";
 import { diacriticSensitiveRegex } from "@/helpers/diacriticSensitiveRegex";
 import { connect } from "@/lib/mongodb";
 import { Developer } from "@/models";
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
   const { nickname, name, birth_date, stack } = body;
 
   if (!nickname || !name || !birth_date) {
-    return BadRequest("nickname, name e birth_date são obrigatórios.");
+    return NotValid("nickname, name e birth_date são obrigatórios.");
   }
 
   if (typeof nickname !== "string" || typeof name !== "string") {
@@ -79,16 +79,27 @@ export async function POST(req: Request) {
     );
   }
 
+  if (stack && !Array.isArray(stack)) {
+    return BadRequest("stack deve ser um array.");
+  }
+
+  if (stack && stack.some((item: any) => typeof item !== "string")) {
+    return BadRequest("stack deve ser um array de strings.");
+  }
+
   try {
     await connect();
+    const devExists = await Developer!.findOne({ nickname: nickname }).exec();
+    if (devExists) {
+      return NotValid("Este nickname já está a ser usado.");
+    }
     const dev = await Developer!.create({
       nickname,
       name,
       birth_date,
       stack,
     });
-
-    return Success(201, dev, {
+    return Success(201, dev._doc, {
       Location: `/devs/${dev.id}`,
     });
   } catch (error) {

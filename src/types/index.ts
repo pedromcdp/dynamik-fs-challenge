@@ -1,3 +1,5 @@
+import { z } from "zod";
+import { formSchema } from "@/lib/formSchema";
 import { Document } from "mongoose";
 
 export interface IDeveloper extends Document {
@@ -27,9 +29,7 @@ export interface Developer {
 
 export interface IGetDevResponse {
   sucess: boolean;
-  id: string;
-  nickname: string;
-  name: string;
-  birth_date: string;
-  stack: string[] | null;
+  data: Developer;
 }
+
+export type IAddDeveloper = z.infer<typeof formSchema>;
