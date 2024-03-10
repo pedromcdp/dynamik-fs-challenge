@@ -32,6 +32,8 @@ Aceder à pasta do repositório
   docker-compose up
 ```
 
+Depois ir browser e aceder a localhost:3000
+
 #### NPM
 
 Instalar as dependências
