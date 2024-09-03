@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { formSchema } from "@/lib/formSchema";
-import { Document } from "mongoose";
+import type { Document } from "mongoose";
 
 export interface IDeveloper extends Document {
   _id: string;

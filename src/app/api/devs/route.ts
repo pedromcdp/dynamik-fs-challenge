@@ -90,15 +90,18 @@ export async function POST(req: Request) {
   try {
     await connect();
     const devExists = await Developer!.findOne({ nickname: nickname }).exec();
+
     if (devExists) {
       return NotValid("Este nickname já está a ser usado.");
     }
+
     const dev = await Developer!.create({
       nickname,
       name,
       birth_date,
       stack,
     });
+
     return Success(201, dev._doc, {
       Location: `/devs/${dev.id}`,
     });

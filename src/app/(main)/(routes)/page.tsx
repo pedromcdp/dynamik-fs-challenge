@@ -24,10 +24,15 @@ export default async function Home({
     searchParams.q,
     Number(searchParams.page)
   );
+  
+  if (response.success === false) {
+    return <p className="text-center w-full">Ocorreu um erro na ligação a base de dados</p>;
+  } 
 
   if (response.numberOfResults === 0) {
     return <p className="text-center w-full">Nenhum dev encontrado</p>;
   }
+
 
   return (
     <section id="dev-table" className="w-full flex flex-col gap-2">

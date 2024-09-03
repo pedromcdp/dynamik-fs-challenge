@@ -1,10 +1,15 @@
 import { NextResponse } from "next/server";
 
-export const Success = (
+interface Response {
+  success: boolean;
+  data?: <T>(data: T) => T;
+}
+
+export const Success = <T>(
   status: number = 200,
-  data: any,
+  data: T,
   headers?: HeadersInit
-) => {
+): NextResponse<Response> => {
   return NextResponse.json(
     {
       success: true,

@@ -18,8 +18,8 @@ export async function connect() {
   }
 
   if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
+    const opts:mongoose.ConnectOptions = {
+      bufferCommands: false,      
     };
 
     cached.promise = mongoose
