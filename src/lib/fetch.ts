@@ -1,9 +1,10 @@
 import type { IGetDevResponse, IGetDevByTermResponse } from "@/types";
+import { AppConfig } from "@/utils/appConfig";
 import { revalidateTag } from "next/cache";
 
 export const getDevById = async (id: string): Promise<IGetDevResponse> => {
   try {
-    const response = await fetch(`http://localhost:3000/api/devs/${id}`, {
+    const response = await fetch(`${AppConfig.domain}/api/devs/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +26,7 @@ export const getDevsbyTerm = async (
 ): Promise<IGetDevByTermResponse> => {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/devs?terms=${term}&page=${page}`,
+      `${AppConfig.domain}/api/devs?terms=${term}&page=${page}`,
       {
         method: "GET",
         headers: {

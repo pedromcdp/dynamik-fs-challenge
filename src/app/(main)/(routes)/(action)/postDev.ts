@@ -1,4 +1,5 @@
 import { formSchema } from "@/lib/formSchema";
+import { AppConfig } from "@/utils/appConfig";
 import { createSafeActionClient } from "next-safe-action";
 import { redirect } from "next/navigation";
 
@@ -34,7 +35,7 @@ export const postDev = action(
       throw new Error("Erro ao adicionar developer.");
     }
 
-    const url = new URL(`http://localhost:3000/dev/${responseData._id}`);
+    const url = new URL(`${AppConfig.domain}/dev/${responseData._id}`);
     redirect(url.toString());
   }
 );
